@@ -1,0 +1,17 @@
+<section class="form-group">
+	<label class="col-md-4" for="interst">
+		Interest:
+	</label>
+	<section class="col-md-8">
+		<input type="tel" required ng-model="interest.field" class="form-control" placeholder="hobby1,hobby2,hobby3" name="interst" ng-change="interest.change()">
+	</section>
+</section>
+<section class="form-group">
+	<label class="col-md-4" for="interst">
+		
+	</label>
+	<ul class="col-md-8 hobby-section" ng-if="interest.array.length">
+		<li ng-repeat="item in interest.array track by $index">{{item}}<span class="close-btn" aria-hidden="true" ng-click="interest.close(item)">×</span></li>
+		
+	</ul>
+</section>

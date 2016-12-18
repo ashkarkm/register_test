@@ -1,0 +1,131 @@
+<h1 ng-show="!profile.viewProfile">Add Profile</h1>
+<form ng-show="!profile.viewProfile" novalidate ng-class="{'form-submit':profile.submitError}" name='registerForm' ng-submit="profile.submit(registerForm.$valid)">
+	<section class="edit-profile">
+		<aside class="col-md-3 left-section">
+			<article ng-class="{'ng-invalid':!profile.form.profile_image}" class="edit-pic">
+				<img-upload model="profile.form.profile_image"></img-upload>
+			</article>
+		</aside>
+		<aside class="col-md-1 line"></aside>
+		<aside class="col-md-8 right-section">
+			<article>
+				<section class="form-group clearfix">
+					<label class="col-md-4" for="name">
+						Name:
+					</label>
+					<section class="col-md-4">
+						<input type="text" required ng-model="profile.form.first_name" class="form-control" placeholder="First Name" name="name" ng-pattern="profile.patterns"  maxlength="20">
+					</section>
+					<section class="col-md-4">
+						<input type="text" required ng-model="profile.form.last_name"  class="form-control" placeholder="Last Name">
+					</section>
+				</section>
+				<section class="form-group clearfix">
+					<label class="col-md-4" for="age">
+						Age:
+					</label>
+					<section class="col-md-8" ng-class="{'ng-invalid':!profile.form.age}">
+							<rzslider  required rz-slider-model="profile.form.age" rz-slider-options="profile.slider_age.options"></rzslider>
+					</section>
+				</section>
+				<section class="form-group clearfix">
+					<label class="col-md-4" for="email">
+						Email:
+					</label>
+					<section class="col-md-8">
+						<input type="email" required ng-model="profile.form.email" class="form-control" placeholder="sample@123.com" name="email">
+					</section>
+				</section>
+				<section class="form-group clearfix">
+					<label class="col-md-4" for="tel">
+						Tel:
+					</label>
+					<section class="col-md-8">
+						<input type="tel" ng-model="profile.form.telephone"  required class="form-control" placeholder="(212)477-1000" name="tel">
+					</section>
+				</section>
+				<section class="form-group clearfix">
+					<label class="col-md-4" for="tel">
+						Country:
+					</label>
+					<section class="col-md-8">
+						<select class="form-control" required ng-model="profile.form.country">
+							<option value="">Select</option>
+							<option value="{{country.country_id}}" ng-repeat="country in profile.formData.country">{{country.name}}</option>
+						</select>
+					</section>
+				</section>
+				<section class="form-group clearfix">
+					<label class="col-md-4" for="tel">
+						State:
+					</label>
+					<section class="col-md-8">
+						<select class="form-control" required ng-model="profile.form.state">
+							<option value="">Select</option>
+							<option value="{{state.name}}" ng-repeat="state in profile.formData.states|filter:{ country_id : profile.form.country }">{{state.name}}</option>
+						</select>
+					</section>
+				</section>
+				<section class="form-group clearfix">
+					<label class="col-md-4" for="tel">
+						Address:
+					</label>
+					<section class="col-md-8">
+						<select class="form-control" required ng-model="profile.address">
+							<option value="">Select</option>
+							<option value="{{address.name}}" ng-repeat="address in profile.formData.address">{{address.name}}</option>
+							
+						</select>
+					</section>
+				</section>
+				<section class="form-group clearfix" ng-if="profile.address">
+					<label class="col-md-4" for="tel">
+						Address 1:
+					</label>
+					<section class="col-md-8">
+						<textarea class="form-control" placeholder="{{profile.address == 'Home' ? 'Home Address 1' : 'Company Address 1'  }}" required ng-model="profile.form.comp_address1"></textarea>
+					</section>
+				</section>
+				<section class="form-group clearfix" ng-if="profile.address">
+					<label class="col-md-4" for="tel">
+						Address 2:
+					</label>
+					<section class="col-md-8">
+						<textarea class="form-control" placeholder="{{profile.address == 'Home' ? 'Home Address 2' : 'Company Address 2'  }}" required ng-model="profile.form.comp_address2"></textarea>
+					</section>
+				</section>
+				<interest model="profile.form.interest"></interest>
+				<section class="form-group">
+					<section class="checkbox col-md-offset-2 col-md-10" required>
+						<input type="checkbox" required ng-model="profile.form.agree">Subscribe to News Letter
+					</section>
+				</section>
+				<section class="form-group clearfix">
+					<section class="checkbox col-md-offset-7 col-md-4">
+						<button class="btn btn-primary btn-larg form-control" type="submit">Submit</button>
+					</section>
+				</section>
+				<section class="clearfix"></section>
+			</article>
+		</aside>
+	</section>
+</form>
+
+	<h1 ng-show="profile.viewProfile">View Profile</h1>
+
+	<section class="edit-profile" ng-show="profile.viewProfile">
+		<aside class="col-md-3 left-section">
+			<article ng-class="{'ng-invalid':!profile.form.profile_image}" class="clearfix view-pic">
+				<img-upload model="profile.form.profile_image"></img-upload>
+			</article>
+			<article class="edit-prof"><a href="javascipt:void(0)" ng-click="profile.edit()">Edit Profile</a></article>
+		</aside>
+		<aside class="col-md-1 line"></aside>
+		<aside class="col-md-8 right-section">
+			 <p>I am <a> Mr.{{profile.form.first_name+' '+profile.form.last_name}}</a> and i am <a>{{profile.age(profile.form.age)}}</a> years and you can send your emails to <a>{{profile.form.email}}</a> and i lives in the state of {{profile.form.state}} i likes to  <a ng-repeat="item in profile.form.interest"><span ng-if="$last &&  profile.form.interest.length>1"> and </span> {{item}} <span ng-if="!$last &&  profile.form.interest.length>1 && $index !== profile.form.interest.length-2">,</span></a> . And please send me the news letters.please reachout to me on my phone {{profile.form.telephone}} </p>
+			 <article class="col-md-4 col-md-offset-4 ">
+			 	<button class="btn btn-primary form-control">Agree</button>
+			 </article>
+		</aside>
+	</section>
+</form>

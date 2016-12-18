@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Register Application</title>
+		<link rel="stylesheet" type="text/css" href="bower_components/bootstrap/dist/css/bootstrap.css">
+		<link rel="stylesheet" type="text/css" href="bower_components/angularjs-slider/dist/rzslider.css">
+		<link rel="stylesheet" type="text/css" href="css/custom.css">
+	</head>
+	<body ng-app="registerApp">
+		<header>
+			<navigation></navigation>
+		</header>
+		<section class="container clearfix">
+			<ng-view></ng-view>
+		</section>
+		
+		
+		<!-- js,angular vendor libraries -->
+		<script src="bower_components/jquery/dist/jquery.min.js"></script>
+		<script  src="bower_components/angular/angular.js"></script>
+		<script src="bower_components/angular-route/angular-route.js"></script>
+		<script src="bower_components/angularjs-slider/dist/rzslider.js"></script>
+		<!-- js,angular vendor libraries -->
+
+		<!-- angular module file -->
+		<script src="app/app.js"></script>
+		<!-- angular module file -->
+
+		<!-- angular controllers -->
+		<script src="app/registerApp/Controllers/RegisterController.js"></script>
+		<script src="app/registerApp/Controllers/newRegisterController.js"></script>
+		<!-- angular controllers -->
+
+		<!-- angular directives -->
+		<script src="app/common/directives/Navigation.js"></script>
+		<script src="app/registerApp/directives/ImgUpload.js"></script>
+		<script src="app/registerApp/directives/Interest.js"></script>
+		<!-- angular directives -->
+	</body>
+</html>
